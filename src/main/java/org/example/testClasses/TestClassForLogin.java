@@ -22,6 +22,11 @@ public class TestClassForLogin {
     public void testLogin() {
         loginFeature.login();
     }
+    @Test(priority = 1, dependsOnMethods = "testBrowserLaunch")
+    public void testPasswordFieldSecurity() {
+        loginFeature.passwordFieldSecurity();
+    }
+
     @Test(dependsOnMethods = "testLogin")
     public void testVerifyLogin() throws InterruptedException {
         loginFeature.verifyLogin();

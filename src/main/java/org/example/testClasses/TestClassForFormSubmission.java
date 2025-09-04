@@ -34,17 +34,12 @@ public class TestClassForFormSubmission {    //Read data from property file
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    // 🔹 First test: navigate to form page
-//    @Test(priority = 0)
-//    public void testLaunchFormPage() {
-//        formFeature.launchFormPage();
-//    }
-
     @Test(priority = 0)
     public void testFormSubmissionClick()
     {
         formFeature.formSubmissionClick();
     }
+
     @Test(priority = 1)
     public void testNameField() {
         WebElement nameField = formFeature.getNameField();

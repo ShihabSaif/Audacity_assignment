@@ -55,6 +55,28 @@ public class LoginFeature extends BasePage {
         Actions actions = new Actions(driver);
         actions.moveToElement(loginBtn).click().perform();
     }
+
+    public void passwordFieldSecurity()
+    {
+        // Wait for password field to be visible
+        WebElement passwordField = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("password"))
+        );
+
+        // 1. Assert proper masking (type should be "password")
+        String fieldType = passwordField.getAttribute("type");
+        Assert.assertEquals(fieldType, "password", "❌ Password field is not masked!");
+
+        // 2. Assert secure autocomplete attribute
+        String autoCompleteAttr = passwordField.getAttribute("autocomplete");
+
+        Assert.assertTrue(
+                autoCompleteAttr == null
+                        || autoCompleteAttr.equalsIgnoreCase("off")
+                        || autoCompleteAttr.equalsIgnoreCase("new-password"),
+                "❌ Password field has insecure autocomplete: " + autoCompleteAttr
+        );
+    }
     public void verifyLogin() throws InterruptedException
     {
         WebElement headerElement = wait.until(

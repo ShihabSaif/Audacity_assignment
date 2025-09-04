@@ -3,6 +3,7 @@ package org.example.features;
 import org.example.browserOpen.BasePage;
 import org.example.utility.UTIL;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 import java.util.Properties;
 
 public class EcommerceSite extends BasePage {
@@ -79,6 +81,38 @@ public class EcommerceSite extends BasePage {
 
         // Click using JavaScript (more reliable if overlays exist)
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", loginButton);
+    }
+    public void addToCart()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        List<WebElement> addToCartButtons = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                        By.xpath("//button[@type='button' and normalize-space()='Add to cart']")
+                )
+        );
+        // Scroll to the first button and click
+        WebElement firstButton = addToCartButtons.get(0);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", firstButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", firstButton);
+    }
+    public void clickCart() throws InterruptedException {
+        // 1. Locate the span wrapping the SVG
+        WebElement cartSpan = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//div[@class='profile flex items-center gap-4']//span[@role='button'][.//svg]")
+        ));
+
+// 2. Scroll the element into view (center of screen)
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({behavior:'auto', block:'center', inline:'center'});",
+                cartSpan
+        );
+
+// 3. Small wait for animations/overlays
+        Thread.sleep(500);
+
+// 4. Click using JavaScript (bypasses interception issues)
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", cartSpan);
 
     }
 }

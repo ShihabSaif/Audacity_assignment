@@ -32,4 +32,12 @@ public class TestClassForEcommerce {
     public void testloginButton() throws InterruptedException {
         ecommerce.loginButton();
     }
+    @Test(priority = 5, dependsOnMethods = "testclickVisitDemoSite")
+    public void testaddToCart() throws InterruptedException {
+        ecommerce.addToCart();
+    }
+    @Test(priority = 6, dependsOnMethods = "testclickVisitDemoSite")
+    public void testclickCart() throws InterruptedException {
+        ecommerce.clickCart();
+    }
 }

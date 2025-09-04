@@ -55,7 +55,8 @@ public class LoginFeature extends BasePage {
         Actions actions = new Actions(driver);
         actions.moveToElement(loginBtn).click().perform();
     }
-    public void verifyLogin() throws InterruptedException {
+    public void verifyLogin() throws InterruptedException
+    {
         WebElement headerElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
                         By.cssSelector("h2.text-xl.font-oswald.mb-3.uppercase.not-odd\\:font-bold")
@@ -102,5 +103,25 @@ public class LoginFeature extends BasePage {
         Assert.assertTrue(errorMsg.isDisplayed(), "Error message should be displayed for invalid login");
         Assert.assertEquals(errorMsg.getText().trim(), "Your email and password both are invalid!");
 
+    }
+    public void registration()
+    {
+        // Wait until the "Registration" span is clickable
+        WebElement registrationBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Registration']"))
+        );
+
+        // Click the element
+        registrationBtn.click();
+    }
+    public void forgotPassword()
+    {
+        // Wait until the "Forgot Password" span is clickable
+        WebElement forgotPasswordBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Forgot Password']"))
+        );
+
+        // Click the element
+        forgotPasswordBtn.click();
     }
 }

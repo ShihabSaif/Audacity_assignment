@@ -17,7 +17,7 @@ import static org.example.browserOpen.BrowserOpening.driver;
 
 public class FormSubmissionFeature extends BasePage {
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));;
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     public FormSubmissionFeature() throws Exception {
         super();
         PageFactory.initElements(driver, this);

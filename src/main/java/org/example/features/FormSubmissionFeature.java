@@ -73,19 +73,20 @@ public class FormSubmissionFeature extends BasePage {
 
     // Select color (Radio button)
     public void selectColor() throws InterruptedException {
-        Thread.sleep(2500);
-        WebElement colorRadio = wait.until(ExpectedConditions.elementToBeClickable(By.id(colorID)));
+        WebElement colorRadio = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(colorID)));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", colorRadio);
-        colorRadio.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", colorRadio);
     }
 
     // Select food (Checkbox)
     public void selectFood() throws InterruptedException {
-        Thread.sleep(2500);
-        WebElement foodCheckbox = wait.until(ExpectedConditions.elementToBeClickable(By.id(foodID)));
+        WebElement foodCheckbox = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(foodID)));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", foodCheckbox);
-        if (!foodCheckbox.isSelected()) {
-            foodCheckbox.click();
+        Boolean isSelected = (Boolean) ((JavascriptExecutor) driver).executeScript(
+                "return arguments[0].checked;", foodCheckbox
+        );
+        if (!isSelected) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", foodCheckbox);
         }
     }
 

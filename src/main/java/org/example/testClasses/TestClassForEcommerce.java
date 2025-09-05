@@ -36,8 +36,20 @@ public class TestClassForEcommerce {
     public void testaddToCart() throws InterruptedException {
         ecommerce.addToCart();
     }
-    @Test(priority = 6, dependsOnMethods = "testclickVisitDemoSite")
+    @Test(priority = 6, dependsOnMethods = "testaddToCart")
     public void testclickCart() throws InterruptedException {
         ecommerce.clickCart();
+    }
+    @Test(priority = 7, dependsOnMethods = "testclickCart")
+    public void testclickCheckout() throws InterruptedException {
+        ecommerce.clickCheckout();
+    }
+    @Test(priority = 8, dependsOnMethods = "testclickCheckout")
+    public void testfillCheckoutPageAndClickContinue() throws InterruptedException {
+        ecommerce.fillCheckoutPageAndClickContinue();
+    }
+    @Test(priority = 9, dependsOnMethods = "testclickVisitDemoSite")
+    public void testclickFavorite() throws InterruptedException {
+        ecommerce.clickFavorite();
     }
 }
